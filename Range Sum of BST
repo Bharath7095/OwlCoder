@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int s=0;
+    void inorder(TreeNode *root,int l,int h)
+    {
+        if(root==NULL)return;
+        if(root->val>=l && root->val<=h)
+        {
+            s+=root->val;
+                    
+        }
+        inorder(root->left,l,h);
+        inorder(root->right,l,h);
+    }
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        inorder(root,low,high);
+        return s;
+    }
+};
