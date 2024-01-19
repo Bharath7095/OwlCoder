@@ -1,0 +1,21 @@
+long long mod=1000000007;
+long long solve(vector<int> c) {
+    map<long long,long long>mp;
+    for(long long i=0;i<c.size();i++)
+    {
+        mp[c[i]]++;
+    }
+    long long p=1;
+    vector<long long>vt(c.size(),0);
+    vt[0]=mp[0];
+    for(long long i=1;i<vt.size();i++)
+    {
+        vt[i]=vt[i-1]+mp[i];
+    }
+    for(long long i=0;i<c.size();i++)
+    {
+        if(vt[i]==0) return 0;
+        p=((p%mod)*((vt[i]-i)%mod))%mod;
+    }
+    return p;
+}
