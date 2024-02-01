@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bitset<30>c,cl,cr;
+    void fun(int row,int n,vector<string>&s,vector<vector<string>>&ans)
+    {
+        if(row>=n){
+            ans.push_back(s);
+            return;
+        }
+        for(int i=0;i<n;i++){
+            if(!c[i] and !cl[row+i] and !cr[row-i+n-1]){
+                c[i]=cl[row+i]=cr[row-i+n-1]=1;
+                s[row][i]='Q';
+                fun(row+1,n,s,ans);
+                s[row][i]='.';
+                c[i]=cl[row+i]=cr[row-i+n-1]=0;
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>>ans;
+        vector<string>s;
+        for(int i=0;i<n;i++){
+            string l(n,'.');
+            s.push_back(l);
+        }
+        fun(0,n,s,ans);
+        return ans;
+    }
+};
